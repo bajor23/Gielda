@@ -33,6 +33,13 @@ void Konto::zapiszDoPliku() //wersja robocza
 	plik.close();
 }
 
-void Konto::kupAkcje(string symbolAkcji, int ilosc)
+void Konto::kupAkcje(Notowanie spolka, int ilosc)
 {
+	double wartoscAkcji = spolka.getKursZamkniecia() * ilosc;
+	if (wartoscAkcji > stanKonta) //wyjscie gdy brak kasy
+		return;
+	mojeAkcje.push_back({spolka, ilosc}); //dodadnie info o zakupionych akcjach (trzba dopisac warunek sprawdzajacy czy juz czasem nie ma 
+	stanKonta -= wartoscAkcji; //obnizenie stanu konta  
+	stanKontaWInwestycjach += wartoscAkcji; //dodadnie do inwestycji
+	
 }

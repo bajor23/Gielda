@@ -27,6 +27,19 @@ Gielda::Gielda()
     URLDownloadToFile(NULL, _T("https://stooq.pl/q/l/?s=pzu&f=sd2t2ohlcv&h&e=csv"), _T("notowania\\pzu.csv"), 0, NULL);
     URLDownloadToFile(NULL, _T("https://stooq.pl/q/l/?s=spl&f=sd2t2ohlcv&h&e=csv"), _T("notowania\\spl.csv"), 0, NULL);
     URLDownloadToFile(NULL, _T("https://stooq.pl/q/l/?s=tpe&f=sd2t2ohlcv&h&e=csv"), _T("notowania\\tpe.csv"), 0, NULL);
+}
+
+void Gielda::zapiszDoPliku()
+{
+    ofstream plik("ustawienia.txt");
+    plik << uzytkownik;
+    plik.close();
+}
+
+int main()
+{
+    Gielda gielda = Gielda();
+
     //utworzenie obiektow
     Notowanie ale = Notowanie("notowania\\ale.csv");
     Notowanie alr = Notowanie("notowania\\alr.csv");
@@ -48,19 +61,16 @@ Gielda::Gielda()
     Notowanie pzu = Notowanie("notowania\\pzu.csv");
     Notowanie spl = Notowanie("notowania\\spl.csv");
     Notowanie tpe = Notowanie("notowania\\tpe.csv");
-}
-
-void Gielda::zapiszDoPliku()
-{
-    ofstream plik("ustawienia.txt");
-    plik << uzytkownik;
-    plik.close();
-}
-
-int main()
-{
-    Gielda gielda = Gielda();
-
+    
     Konto bajor = Konto("bajor", 10000);
+    
+    cout << bajor.getStanKonta() << endl;
+    
+    bajor.kupAkcje(pzu, 3);
+    
+    cout << bajor.getStanKonta() << endl;
+
     bajor.zapiszDoPliku();
+
+    cout << bajor.mojeAkcje[0].spolka.getSymbol();
 }
