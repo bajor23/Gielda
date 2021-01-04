@@ -22,7 +22,7 @@ public:
 	struct akcje
 	{
 		Notowanie spolka;
-		int ilosæ;
+		int ilosc;
 	};
 	vector <akcje> mojeAkcje;
 private:

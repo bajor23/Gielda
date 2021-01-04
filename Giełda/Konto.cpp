@@ -38,7 +38,20 @@ void Konto::kupAkcje(Notowanie spolka, int ilosc)
 	double wartoscAkcji = spolka.getKursZamkniecia() * ilosc;
 	if (wartoscAkcji > stanKonta) //wyjscie gdy brak kasy
 		return;
-	mojeAkcje.push_back({spolka, ilosc}); //dodadnie info o zakupionych akcjach           TODO: (trzba dopisac warunek sprawdzajacy czy juz czasem nie ma w vectorze krotki z danymi akcjami. czy kupujac np pzu juz nie ma jakiejs ilosci pzu)
+
+	for (int i = 0; i < mojeAkcje.size(); i++) //przeszukanie vectora w poszukiwaniu istniejacej krotki
+	{
+		if (mojeAkcje[i].spolka.getSymbol() == spolka.getSymbol())
+		{
+			mojeAkcje[i].ilosc += ilosc;
+			stanKonta -= wartoscAkcji;
+			stanKontaWInwestycjach += wartoscAkcji;
+			return;
+		}
+
+	}
+	//gdy brak krotki dodanie na koniec vectora
+	mojeAkcje.push_back({spolka, ilosc}); //dodadnie info o zakupionych akcjach 
 	stanKonta -= wartoscAkcji; //obnizenie stanu konta  
 	stanKontaWInwestycjach += wartoscAkcji; //dodadnie do inwestycji
 }
@@ -46,9 +59,9 @@ void Konto::kupAkcje(Notowanie spolka, int ilosc)
 void Konto::sprzedajAkcje(Notowanie spolka, int ilosc)
 {
 	for (int i = 0; i < mojeAkcje.size(); i++)
-		if (mojeAkcje[i].spolka.getSymbol() == spolka.getSymbol() && mojeAkcje[i].ilosæ <= ilosc) //czy posiadam dana spolke i odpowiedznia ilosc akcji?
+		if (mojeAkcje[i].spolka.getSymbol() == spolka.getSymbol() && mojeAkcje[i].ilosc <= ilosc) //czy posiadam dana spolke i odpowiedznia ilosc akcji?
 		{
-			mojeAkcje[i].ilosæ -= ilosc;
+			mojeAkcje[i].ilosc -= ilosc;
 			double wartoscAkcji = spolka.getKursZamkniecia() * ilosc;
 			stanKonta += wartoscAkcji;
 			stanKontaWInwestycjach -= wartoscAkcji;
