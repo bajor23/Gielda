@@ -38,8 +38,19 @@ void Konto::kupAkcje(Notowanie spolka, int ilosc)
 	double wartoscAkcji = spolka.getKursZamkniecia() * ilosc;
 	if (wartoscAkcji > stanKonta) //wyjscie gdy brak kasy
 		return;
-	mojeAkcje.push_back({spolka, ilosc}); //dodadnie info o zakupionych akcjach (trzba dopisac warunek sprawdzajacy czy juz czasem nie ma 
+	mojeAkcje.push_back({spolka, ilosc}); //dodadnie info o zakupionych akcjach           TODO: (trzba dopisac warunek sprawdzajacy czy juz czasem nie ma w vectorze krotki z danymi akcjami. czy kupujac np pzu juz nie ma jakiejs ilosci pzu)
 	stanKonta -= wartoscAkcji; //obnizenie stanu konta  
 	stanKontaWInwestycjach += wartoscAkcji; //dodadnie do inwestycji
-	
+}
+
+void Konto::sprzedajAkcje(Notowanie spolka, int ilosc)
+{
+	for (int i = 0; i < mojeAkcje.size(); i++)
+		if (mojeAkcje[i].spolka.getSymbol() == spolka.getSymbol() && mojeAkcje[i].ilosæ <= ilosc) //czy posiadam dana spolke i odpowiedznia ilosc akcji?
+		{
+			mojeAkcje[i].ilosæ -= ilosc;
+			double wartoscAkcji = spolka.getKursZamkniecia() * ilosc;
+			stanKonta += wartoscAkcji;
+			stanKontaWInwestycjach -= wartoscAkcji;
+		}
 }

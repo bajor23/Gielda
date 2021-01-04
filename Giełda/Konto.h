@@ -17,6 +17,8 @@ public:
 	void setNazwaUzytkownika(string nazwaUzytkonika);
 	void zapiszDoPliku();
 	void kupAkcje(Notowanie spolka, int ilosc);
+	void sprzedajAkcje(Notowanie spolka, int ilosc);
+	void wyswietlAkcje();
 	struct akcje
 	{
 		Notowanie spolka;
