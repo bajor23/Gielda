@@ -7,8 +7,11 @@ class Gielda
 {
 public:
 	Gielda();//konstruktor pobiera kursy "wig20"
+	Konto* getUzytkownik();
+	void setUzytkownik(Konto &uzytkownik);
 	void zapiszDoPliku();
+
 private:
-	string uzytkownik;
+	Konto* uzytkownik = NULL;
 };
 

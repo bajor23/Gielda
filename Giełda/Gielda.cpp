@@ -29,6 +29,16 @@ Gielda::Gielda()
     URLDownloadToFile(NULL, _T("https://stooq.pl/q/l/?s=tpe&f=sd2t2ohlcv&h&e=csv"), _T("notowania\\tpe.csv"), 0, NULL);
 }
 
+Konto* Gielda::getUzytkownik()
+{
+    return uzytkownik;
+}
+
+void Gielda::setUzytkownik(Konto &uzytkownik)
+{
+    this->uzytkownik = &uzytkownik;
+}
+
 void Gielda::zapiszDoPliku()
 {
     ofstream plik("ustawienia.txt");
@@ -63,14 +73,18 @@ int main()
     Notowanie tpe = Notowanie("notowania\\tpe.csv");
     
     Konto bajor = Konto("bajor", 10000);
-    
-    cout << bajor.getStanKonta() << endl;
-    
-    bajor.kupAkcje(pzu, 3);
-    
-    cout << bajor.getStanKonta() << endl;
 
-    bajor.zapiszDoPliku();
+    gielda.setUzytkownik(bajor);
 
-    cout << bajor.mojeAkcje[0].spolka.getSymbol();
+    cout << "aktualny uzytkownik to: " << gielda.getUzytkownik()->getNazwaUzytkownika() << endl;
+    
+    cout << "stan konta: " << gielda.getUzytkownik()->getStanKonta() << endl; //cout << bajor.getStanKonta() << endl;
+    
+    gielda.getUzytkownik()->kupAkcje(pzu, 3);
+    
+    gielda.getUzytkownik()->zapiszDoPliku();
+
+    cout << gielda.getUzytkownik()->mojeAkcje[0].spolka.getSymbol() << endl;
+
+    
 }

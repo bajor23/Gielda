@@ -48,7 +48,6 @@ void Konto::kupAkcje(Notowanie spolka, int ilosc)
 			stanKontaWInwestycjach += wartoscAkcji;
 			return;
 		}
-
 	}
 	//gdy brak krotki dodanie na koniec vectora
 	mojeAkcje.push_back({spolka, ilosc}); //dodadnie info o zakupionych akcjach 
