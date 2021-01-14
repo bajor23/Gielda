@@ -29,6 +29,4 @@ private:
 	string nazwaUzytkownika;
 	double stanKonta;
 	double stanKontaWInwestycjach;
-
-	
 };

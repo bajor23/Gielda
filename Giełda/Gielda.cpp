@@ -79,12 +79,18 @@ int main()
     cout << "aktualny uzytkownik to: " << gielda.getUzytkownik()->getNazwaUzytkownika() << endl;
     
     cout << "stan konta: " << gielda.getUzytkownik()->getStanKonta() << endl; //cout << bajor.getStanKonta() << endl;
+    cout << "stan konta (inwestycje): " << gielda.getUzytkownik()->getStanKontaWInwestycjach() << endl;
     
     gielda.getUzytkownik()->kupAkcje(pzu, 3);
     
+
+    cout << "stan konta: " << gielda.getUzytkownik()->getStanKonta() << endl; //cout << bajor.getStanKonta() << endl;
+    cout << "stan konta (inwestycje): " << gielda.getUzytkownik()->getStanKontaWInwestycjach() << endl;
+
     gielda.getUzytkownik()->zapiszDoPliku();
 
-    cout << gielda.getUzytkownik()->mojeAkcje[0].spolka.getSymbol() << endl;
+    
+    cout << gielda.getUzytkownik()->mojeAkcje[0].spolka.getSymbol() << " = " << gielda.getUzytkownik()->mojeAkcje[0].ilosc << endl;
 
     
 }
