@@ -13,7 +13,7 @@ Notowanie::Notowanie(string plikNotowania)
 	plik.close();
 	vector <string> zmienne;
 	while (getline(ss, zmienna, ','))
-		zmienne.push_back({ zmienna });
+		zmienne.push_back(zmienna);
 	this->symbol = zmienne[0];
 	this->data = zmienne[1];
 	this->czas = zmienne[2];
